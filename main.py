@@ -5,6 +5,12 @@ from turtle import Screen
 from scoreboard import Scoreboard
 import time
 
+"""TO DO:
+- high scores
+- smooth graphics
+
+"""
+
 #this is where we store the "blocks" and balls so we can check if the ball has hit them
 blocklist = []
 ballslist =[]
@@ -37,7 +43,7 @@ p = Paddle()
 
 #initialise scoreboards
 lives_board = Scoreboard(type="lives", x=-250, y=250)
-lives_board.score = 10
+lives_board.score = ""
 scores_board = Scoreboard(type="score", x=40, y=250)
 scores_board.score = 0
 
@@ -64,16 +70,12 @@ def initialise():
         b = Ball()
         ballslist.append(b)
 
-    if difficulty == 1:
-        lives_board.score = 20
-    elif difficulty == 2:
-        lives_board.score = 10
-    else:
-        lives_board.score = 5
-
+    lives_board.setscore(difficulty * 5)
 
 def breakout():
+    """the main game loop"""
 
+    #check each ball and see if it is near a wall or paddle
     for ball in ballslist:
         ball.move()
         x = ball.xcor()
@@ -86,26 +88,21 @@ def breakout():
                 scores_board.update_score(1)
                 ball.returned()
 
-    # if lives_board.score <= 0:
-    #     scores_board.game_over()
-    #     playing = False
-    # elif not blocklist:
-    #     scores_board.win()
-    #     playing = False
-
+    #keyboard control
     s.listen()
     s.onkey(p.move_left, "Left")
     s.onkey(p.move_right, "Right")
     time.sleep(0.1)
     s.update()
-    return lives_board.score
-
+    return lives_board.score, scores_board.score
 
 initialise()
 
 while True:
-    life = breakout()
-    if life <= 0:
+    game = breakout()
+
+    #test for no lives left
+    if game[0] <= 0:
         cont = s.textinput("CONTINUE", "Do you want to continue? (Y/N)")
         if cont == "n":
             s.bye()
@@ -113,6 +110,11 @@ while True:
         else:
             initialise()
             continue
+
+    # test for win (no blocks left)
+    if not blocklist:
+        scores_board.win()
+        cont = s.textinput("CONTINUE", "Do you want to continue? (Y/N)")
 
 
 s.exitonclick()

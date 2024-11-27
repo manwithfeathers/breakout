@@ -17,7 +17,6 @@ class Scoreboard(Turtle):
     def update_score(self, points):
         self.clear()
         self.score += points
-        print(self.score)
         self.write(f"{self.type}: {self.score}", font=FONT)
 
     def game_over(self):
@@ -28,6 +27,8 @@ class Scoreboard(Turtle):
         self.setpos(-250, 0)
         self.write(f"YOU WON! FINAL SCORE {self.score}", font=FONT)
 
-    def restart(self):
-        self.setpos(-350, 0)
-        self.write(f"press 'x' to restart", font=FONT)
+    def setscore(self, score):
+        self.score = score
+        self.clear()
+        self.write(f"{self.type}: {self.score}", font=FONT)
+
