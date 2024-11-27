@@ -4,6 +4,7 @@ import random
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
+        self.clear()
         self.penup()
         self.color("white")
         self.shape("circle")
@@ -29,5 +30,7 @@ class Ball(Turtle):
     def refresh(self):
         self.setpos(0,0)
 
+    def destroy(self):
+        self.hideturtle()
 
 

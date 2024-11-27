@@ -27,3 +27,7 @@ class Scoreboard(Turtle):
     def win(self):
         self.setpos(-250, 0)
         self.write(f"YOU WON! FINAL SCORE {self.score}", font=FONT)
+
+    def restart(self):
+        self.setpos(-350, 0)
+        self.write(f"press 'x' to restart", font=FONT)

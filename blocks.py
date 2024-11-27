@@ -3,6 +3,7 @@ from turtle import Turtle
 class Block(Turtle):
     def __init__(self, x, y):
         super().__init__()
+        self.clear()
         self.penup()
         self.color("white")
         self.shape("square")
