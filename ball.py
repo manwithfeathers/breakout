@@ -28,7 +28,7 @@ class Ball(Turtle):
         self.y_move *= -1
 
     def refresh(self):
-        self.setpos(0,0)
+        self.setpos(random.randint(-100, 100), random.randint(-100, 100))
 
     def destroy(self):
         self.hideturtle()

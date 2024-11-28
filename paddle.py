@@ -9,7 +9,7 @@ class Paddle(Turtle):
         self.color("white")
         self.shape("square")
         self.shapesize(stretch_len=4, stretch_wid=1)
-        self.paddlespeed = 20
+        self.paddlespeed = 30
         self.speed("fastest")
 
     def move_left(self):
